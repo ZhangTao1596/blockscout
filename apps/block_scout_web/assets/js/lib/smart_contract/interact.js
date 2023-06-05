@@ -54,17 +54,23 @@ export const callMethod = (isWalletEnabled, $functionInputs, explorerChainId, $f
         })
         .then((currentAccount) => {
           if (functionName) {
-            const TargetContract = new window.web3.eth.Contract(contractAbi, contractAddress)
-            const sendParams = { from: currentAccount, value: txValue || 0 }
-            const methodToCall = TargetContract.methods[functionName](...args).send(sendParams)
-            methodToCall
-              .on('error', function (error) {
-                const titleAndError = formatTitleAndError(error)
-                const message = titleAndError.message + (titleAndError.txHash ? `<br><a href="${commonPath}/tx/${titleAndError.txHash}">More info</a>` : '')
-                openErrorModal(titleAndError.title.length ? titleAndError.title : `Error in sending transaction for method "${functionName}"`, message, false)
+            web3.eth.getGasPrice()
+              .then(gasPrice => {
+                const TargetContract = new window.web3.eth.Contract(contractAbi, contractAddress)
+                const sendParams = { from: currentAccount, value: txValue || 0, gasPrice: gasPrice }
+                const methodToCall = TargetContract.methods[functionName](...args).send(sendParams)
+                methodToCall
+                  .on('error', function (error) {
+                    const titleAndError = formatTitleAndError(error)
+                    const message = titleAndError.message + (titleAndError.txHash ? `<br><a href="${commonPath}/tx/${titleAndError.txHash}">More info</a>` : '')
+                    openErrorModal(titleAndError.title.length ? titleAndError.title : `Error in sending transaction for method "${functionName}"`, message, false)
+                  })
+                  .on('transactionHash', function (txHash) {
+                    onTransactionHash(txHash, functionName)
+                  })
               })
-              .on('transactionHash', function (txHash) {
-                onTransactionHash(txHash, functionName)
+              .catch(error => {
+                openWarningModal('Err in getting gas price', formatError(error))
               })
           } else {
             const txParams = {
@@ -90,7 +96,7 @@ export const callMethod = (isWalletEnabled, $functionInputs, explorerChainId, $f
     })
 }
 
-function onTransactionHash (txHash, functionName) {
+function onTransactionHash(txHash, functionName) {
   openModalWithMessage($('#pending-contract-write'), true, txHash)
   const getTxReceipt = (txHash) => {
     window.ethereum.request({
@@ -110,7 +116,7 @@ function onTransactionHash (txHash, functionName) {
 
 const ethStrToWeiBn = ethStr => BigNumber(ethStr).multipliedBy(10 ** 18)
 
-function getTxValue ($functionInputs) {
+function getTxValue($functionInputs) {
   const txValueEth = $functionInputs.filter('[tx-value]:first')?.val() || '0'
   return `0x${ethStrToWeiBn(txValueEth).toString(16)}`
 }
