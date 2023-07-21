@@ -1,9 +1,10 @@
-$dropdown-menu-item-color: #333 !default;
-$dropdown-menu-item-hover-color: $secondary !default;
-$dropdown-menu-item-hover-background: rgba($secondary, 0.1) !default;
+$dropdown-menu-item-color: white !default;
+$dropdown-menu-item-hover-color: white !default;
+$dropdown-menu-item-hover-background: rgba($secondary, 0.5) !default;
 
 // These styles extend the default Bootstrap styles
 .dropdown-menu {
+  background: $secondary !important;
   border-bottom: 1px solid #e2e5ec;
   border-left: 1px solid #e2e5ec;
   border-radius: 0 0 2px 2px !important;
