@@ -18,7 +18,7 @@ $gray-400: #ced4da !default;
 $gray-500: #828ba0 !default;
 $gray-600: #cdcdcc !default;
 $gray-700: #495057 !default;
-$gray-800: #343a40 !default;
+$gray-800: white !default;
 $gray-900: #212529 !default;
 $black: #000 !default;
 
@@ -171,7 +171,7 @@ $sizes: map-merge(
 // Settings for the `<body>` element.
 
 $body-bg: $white !default;
-$body-color: $gray-900 !default;
+$body-color: white !default;
 
 // Links
 //
@@ -764,7 +764,7 @@ $card-inner-border-radius: calc(
   #{$card-border-radius} - #{$card-border-width}
 ) !default;
 $card-cap-bg: rgba($black, 0.03) !default;
-$card-bg: $white !default;
+$card-bg: #252530 !default;
 
 $card-img-overlay-padding: 1.25rem !default;
 
@@ -987,7 +987,7 @@ $kbd-font-size: $code-font-size !default;
 $kbd-color: $white !default;
 $kbd-bg: $gray-900 !default;
 
-$pre-color: $gray-900 !default;
+$pre-color: white !default;
 $pre-scrollable-max-height: 340px !default;
 
 // Printing

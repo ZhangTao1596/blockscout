@@ -15,7 +15,7 @@
 
     .dropdown-item {
       &:hover {
-        color: $secondary;
+        color: white !important;
       }
       .row:nth-child(2) {
         p {

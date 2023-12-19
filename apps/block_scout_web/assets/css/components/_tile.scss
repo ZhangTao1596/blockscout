@@ -1,4 +1,4 @@
-$tile-type-block-color: $primary !default;
+$tile-type-block-color: #BFF5C7 !default;
 $tile-type-uncle-color: $cyan !default;
 $tile-type-reorg-color: $purple !default;
 $tile-type-emission-reward-color: $lilac !default;
@@ -14,7 +14,7 @@ $tile-type-progress-bar-color: $primary !default;
 $tile-status-error-reason: #ff7986 !default;
 $tile-status-awaiting-internal-transactions: $warning !default;
 $tile-padding: 1rem;
-$tile-title-color: #333 !default;
+$tile-title-color: white !default;
 $tile-body-a-color: #5959d8 !default;
 
 @mixin generate-tile-block($prefix, $color, $label-color: false) {
@@ -117,7 +117,7 @@ $tile-body-a-color: #5959d8 !default;
 }
 
 .tile-bottom-contents {
-  background-color: #f6f7f9;
+  background-color: $secondary !important;
   font-size: 12px;
   line-height: 1.2;
   padding: 0.8rem 1rem;
@@ -176,17 +176,22 @@ $tile-body-a-color: #5959d8 !default;
 }
 
 .tile {
+border-top: 0 !important;
+border-right: 0 !important;
+border-bottom: 0 !important;
+background-color: $secondary !important;
+
   span[data-address-hash] {
-    color: $tile-body-a-color;
+    color: white !important;
   }
 
   a[data-test=token_link] {
-    color: $tile-body-a-color;
+    color: white;
   }
 
   .tile-body {
     a {
-      color: $tile-body-a-color;
+      color: white;
       &:hover {
         span {
           text-decoration: underline;
@@ -196,7 +201,7 @@ $tile-body-a-color: #5959d8 !default;
   }
 
   .tile-title {
-    color: $tile-title-color;
+    color: $tile-title-color !important;
     font-size: 12px;
 
     &-hash {

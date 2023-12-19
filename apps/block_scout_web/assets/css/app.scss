@@ -129,8 +129,16 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 // Font Awesome
 @import "components/_fontawesome_icon";
 
-@import "theme/dark-theme";
+// @import "theme/dark-theme";
 
-@import "theme/custom_contracts/dark-forest-theme";
-@import "theme/custom_contracts/circles-theme";
+// @import "theme/custom_contracts/dark-forest-theme";
+// @import "theme/custom_contracts/circles-theme";
+.text-dark {
+    color: white !important;
+}
 
+.alert-warning {
+    background-color: #ced4da !important;
+    border-color: #ced4da !important;
+    color: #856404 !important;
+}
